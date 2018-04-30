@@ -13,11 +13,11 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
-import com.udacity.sandwichclub.utils.StringUtils;
 
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
+    public static final String NO_DATA = "No data available";
     private static final int DEFAULT_POSITION = -1;
 
     TextView origin_tv, description_tv,ingredients_tv,also_known_tv;
@@ -75,25 +75,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI() {
 
-        if(TextUtils.isEmpty(sandwich.getPlaceOfOrigin()))
-            findViewById(R.id.place_of_origin_container).setVisibility(View.GONE);
-        else
-            origin_tv.setText(sandwich.getPlaceOfOrigin());
+        origin_tv.setText(TextUtils.isEmpty(sandwich.getPlaceOfOrigin())?NO_DATA:sandwich.getPlaceOfOrigin());
 
-        if(TextUtils.isEmpty(sandwich.getDescription()))
-            findViewById(R.id.description_container).setVisibility(View.GONE);
-        else
-            description_tv.setText(sandwich.getDescription());
+        description_tv.setText(TextUtils.isEmpty(sandwich.getDescription())?NO_DATA:sandwich.getDescription());
 
-        if(TextUtils.isEmpty(sandwich.getIngredientsString()))
-            findViewById(R.id.ingredients_container).setVisibility(View.GONE);
-        else
-            ingredients_tv.setText(sandwich.getIngredientsString());
+        ingredients_tv.setText(TextUtils.isEmpty(sandwich.getIngredientsString())?NO_DATA:sandwich.getIngredientsString());
 
-        if(TextUtils.isEmpty(sandwich.getAlsoKnownAsString()))
-            findViewById(R.id.also_known_container).setVisibility(View.GONE);
-        else
-            also_known_tv.setText(sandwich.getAlsoKnownAsString());
+        also_known_tv.setText(TextUtils.isEmpty(sandwich.getAlsoKnownAsString())?NO_DATA:sandwich.getAlsoKnownAsString());
 
     }
 }
